@@ -5,8 +5,8 @@ using UnityEngine;
 public class slimeMovement : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 8f;
-    private float jumpPower = 16f;
+    private float speed = 100f;
+    private float jumpPower = 200f;
     private bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D rb;
