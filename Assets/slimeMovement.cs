@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,11 @@ using UnityEngine;
 public class slimeMovement : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 100f;
-    private float jumpPower = 200f;
+    private float speed = 5f;
+    private float jumpPower = 100f;
     private bool isFacingRight = true;
 
+    [SerializeField] private Animator ani;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -23,17 +25,20 @@ public class slimeMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
+
+
         if (Input.GetButtonDown("Jump") && isGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            Debug.Log("BOING");
         }
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        if (Input.GetButtonDown("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
-        Flip();
+        //Flip();
     }
 
     private void FixedUpdate()
@@ -43,7 +48,7 @@ public class slimeMovement : MonoBehaviour
 
     private bool isGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.5f, groundLayer);
     }
 
     private void Flip()
