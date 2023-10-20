@@ -5,60 +5,54 @@ using UnityEngine;
 
 public class slimeMovement : MonoBehaviour
 {
-    private float horizontal;
-    private float speed = 5f;
-    private float jumpPower = 100f;
-    private bool isFacingRight = true;
-
-    [SerializeField] private Animator ani;
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
-
+    private Rigidbody2D rb;
+    private float moveSpeed;
+    private float jumpForce;
+    private bool isJumping;
+    private float moveHorizontal;
+    private float moveVertical;
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        moveSpeed = 2f;
+        jumpForce = 60f;
+        isJumping = false;
     }
 
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        moveHorizontal = Input.GetAxisRaw("Horizontal");
+        moveVertical = Input.GetAxisRaw("Jump");
+        
+    }
 
-
-
-        if (Input.GetButtonDown("Jump") && isGrounded())
+    void FixedUpdate()
+    {
+        if (moveHorizontal > 0.1f || moveHorizontal < -0.1f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-            Debug.Log("BOING");
+            rb.AddForce(new Vector2(moveHorizontal * moveSpeed, 0f), ForceMode2D.Impulse);
         }
 
-        if (Input.GetButtonDown("Jump") && rb.velocity.y > 0f)
+        if (!isJumping && moveVertical > 0.1f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            rb.AddForce(new Vector2(0f, moveVertical * jumpForce), ForceMode2D.Impulse);
         }
-
-        //Flip();
     }
 
-    private void FixedUpdate()
+    void OnTriggerEnter2D(Collider2D collision) 
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-    }
-
-    private bool isGrounded()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.5f, groundLayer);
-    }
-
-    private void Flip()
-    {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+        if (collision.CompareTag("Ground"))
         {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            isJumping = false;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision) 
+    {
+        if (collision.CompareTag("Ground"))
+        {
+            isJumping = true;
         }
     }
 
