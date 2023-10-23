@@ -8,6 +8,8 @@ public class playerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
 
+    [SerializeField] private AudioSource jumpSoundEffect;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -18,9 +20,10 @@ public class playerMovement : MonoBehaviour
     private void Update()
     {
         float dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(dirX * 2f, rb.velocity.y);
+        rb.velocity = new Vector2(dirX * 3f, rb.velocity.y);
 
         if (Input.GetButtonDown("Jump")) {
+            jumpSoundEffect.Play();
             rb.velocity = new Vector3(0, 50f, 0);
             
         }
