@@ -11,6 +11,8 @@ public class slimeMovement : MonoBehaviour
     private bool isJumping;
     private float moveHorizontal;
     private float moveVertical;
+
+    [SerializeField] private AudioSource jumpSoundEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +26,7 @@ public class slimeMovement : MonoBehaviour
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         moveVertical = Input.GetAxisRaw("Jump");
-        
+
     }
 
     void FixedUpdate()
@@ -36,11 +38,12 @@ public class slimeMovement : MonoBehaviour
 
         if (!isJumping && moveVertical > 0.1f)
         {
+            jumpSoundEffect.Play();
             rb.AddForce(new Vector2(0f, moveVertical * jumpForce), ForceMode2D.Impulse);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision) 
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ground"))
         {
@@ -48,7 +51,7 @@ public class slimeMovement : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision) 
+    void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Ground"))
         {
