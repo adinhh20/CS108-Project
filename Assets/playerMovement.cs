@@ -7,7 +7,7 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-
+    private bool isJumping;
     [SerializeField] private AudioSource jumpSoundEffect;
 
     // Start is called before the first frame update
@@ -22,11 +22,29 @@ public class playerMovement : MonoBehaviour
         float dirX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(dirX * 3f, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump") && !isJumping)
+        {
             jumpSoundEffect.Play();
             rb.velocity = new Vector3(0, 50f, 0);
-            
+
+        }
+
+
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ground"))
+        {
+            isJumping = false;
         }
     }
 
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ground"))
+        {
+            isJumping = true;
+        }
+    }
 }
