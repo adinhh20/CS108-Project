@@ -647,7 +647,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1647429965}
         m_TargetAssemblyTypeName: EndMenu, Assembly-CSharp
-        m_MethodName: Quit
+        m_MethodName: StartOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
