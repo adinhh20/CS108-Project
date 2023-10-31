@@ -41,13 +41,11 @@ public class playerMovement : MonoBehaviour
             isJumping = false;
         }
 
-        // if (collision.CompareTag("Dead"))
-        // {
-        //     /*Scene currentScene = SceneManager.GetActiveScene();
-        //     SceneManager.LoadScene(currentScene.name);*/
-        //     rb.transform.position = respawnPoint.position;
-        //     rb.velocity = new Vector3(0, 0, 0);
-        // }
+        if (collision.CompareTag("Dead"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
