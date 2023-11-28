@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchBehaviour : MonoBehaviour
+public class HorizontalSwitchBehaviour : MonoBehaviour
 {
-    [SerializeField] DoorBehaviour _doorBehaviour;
-    [SerializeField] BigDoorBehaviour _bigDoorBehaviour;
+    [SerializeField] HorizontalDoorBehaviour _horizontalDoorBehaviour;
+
     [SerializeField] bool _isDoorOpenSwitch;
     [SerializeField] bool _isDoorCloseSwitch;
 
@@ -59,21 +59,13 @@ public class SwitchBehaviour : MonoBehaviour
         {
             _isPressingSwitch = !_isPressingSwitch;
 
-            if (_isDoorOpenSwitch && !_doorBehaviour._isDoorOpen)
+            if (_isDoorOpenSwitch && !_horizontalDoorBehaviour._isDoorOpen)
             {
-                _doorBehaviour._isDoorOpen = !_doorBehaviour._isDoorOpen;
+                _horizontalDoorBehaviour._isDoorOpen = !_horizontalDoorBehaviour._isDoorOpen;
             }
-            else if (_isDoorCloseSwitch && _doorBehaviour._isDoorOpen)
+            else if (_isDoorCloseSwitch && _horizontalDoorBehaviour._isDoorOpen)
             {
-                _doorBehaviour._isDoorOpen = !_doorBehaviour._isDoorOpen;
-            }
-            else if (_isDoorOpenSwitch && !_bigDoorBehaviour._isDoorOpen)
-            {
-                _bigDoorBehaviour._isDoorOpen = !_bigDoorBehaviour._isDoorOpen;
-            }
-            else if (_isDoorCloseSwitch && _bigDoorBehaviour._isDoorOpen)
-            {
-                _bigDoorBehaviour._isDoorOpen = !_bigDoorBehaviour._isDoorOpen;
+                _horizontalDoorBehaviour._isDoorOpen = !_horizontalDoorBehaviour._isDoorOpen;
             }
         }
     }
