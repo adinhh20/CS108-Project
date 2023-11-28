@@ -6805,7 +6805,6 @@ GameObject:
   - component: {fileID: 1021806929}
   - component: {fileID: 1021806926}
   - component: {fileID: 1021806928}
-  - component: {fileID: 1021806930}
   - component: {fileID: 1021806931}
   - component: {fileID: 1021806932}
   - component: {fileID: 1021806933}
@@ -6893,19 +6892,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 184920245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1021806930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1021806925}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f69cec01ecea0734abd3c5632724bdb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpSoundEffect: {fileID: 0}
 --- !u!58 &1021806931
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6965,7 +6951,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ff485f1fb7dca7f4d8130297b5ce871f, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
