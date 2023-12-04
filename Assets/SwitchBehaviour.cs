@@ -59,19 +59,19 @@ public class SwitchBehaviour : MonoBehaviour
         {
             _isPressingSwitch = !_isPressingSwitch;
 
-            if (_isDoorOpenSwitch && !_doorBehaviour._isDoorOpen)
+            if (_isDoorOpenSwitch && _doorBehaviour != null && !_doorBehaviour._isDoorOpen)
             {
                 _doorBehaviour._isDoorOpen = !_doorBehaviour._isDoorOpen;
             }
-            else if (_isDoorCloseSwitch && _doorBehaviour._isDoorOpen)
+            else if (_isDoorCloseSwitch && _doorBehaviour != null && _doorBehaviour._isDoorOpen)
             {
                 _doorBehaviour._isDoorOpen = !_doorBehaviour._isDoorOpen;
             }
-            else if (_isDoorOpenSwitch && !_bigDoorBehaviour._isDoorOpen)
+            else if (_isDoorOpenSwitch && _bigDoorBehaviour != null && !_bigDoorBehaviour._isDoorOpen)
             {
                 _bigDoorBehaviour._isDoorOpen = !_bigDoorBehaviour._isDoorOpen;
             }
-            else if (_isDoorCloseSwitch && _bigDoorBehaviour._isDoorOpen)
+            else if (_isDoorCloseSwitch && _bigDoorBehaviour != null && _bigDoorBehaviour._isDoorOpen)
             {
                 _bigDoorBehaviour._isDoorOpen = !_bigDoorBehaviour._isDoorOpen;
             }
