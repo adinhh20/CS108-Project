@@ -17,14 +17,18 @@ public class DeadFloor2 : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //finishSound.Play();
-            // levelCompleted = true;
-            Dead();
+
+            PlayerDied();
         }
     }
 
-    private void Dead()
+    public void PlayerDied()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        // Store the name of the current scene in PlayerPrefs
+        PlayerPrefs.SetString("CurrentLevel", SceneManager.GetActiveScene().name);
+        PlayerPrefs.Save();
+
+        // Load the restart scene
+        SceneManager.LoadScene("RestartScene"); // Assuming restart scene is at index 3
     }
 }

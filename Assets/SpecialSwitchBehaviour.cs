@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchBehaviour : MonoBehaviour
+public class SpecialSwitchBehaviour : MonoBehaviour
 {
     [SerializeField] DoorBehaviour _doorBehaviour;
     [SerializeField] BigDoorBehaviour _bigDoorBehaviour;
     [SerializeField] bool _isDoorOpenSwitch;
     [SerializeField] bool _isDoorCloseSwitch;
+    [SerializeField] InventoryManager.AllItems _requiredItem1;
+    [SerializeField] InventoryManager.AllItems _requiredItem2;
     [SerializeField] AudioSource openDoorSoundEffect;
 
     float _switchSizeY;
@@ -60,24 +62,26 @@ public class SwitchBehaviour : MonoBehaviour
         {
             _isPressingSwitch = !_isPressingSwitch;
 
-            if (_isDoorOpenSwitch && _doorBehaviour != null && !_doorBehaviour._isDoorOpen)
+            if (HasRequiredItem(_requiredItem1) && HasRequiredItem(_requiredItem2))
             {
-                _doorBehaviour._isDoorOpen = !_doorBehaviour._isDoorOpen;
-                openDoorSoundEffect.Play();
-            }
-            else if (_isDoorCloseSwitch && _doorBehaviour != null && _doorBehaviour._isDoorOpen)
-            {
-                _doorBehaviour._isDoorOpen = !_doorBehaviour._isDoorOpen;
-            }
-            else if (_isDoorOpenSwitch && _bigDoorBehaviour != null && !_bigDoorBehaviour._isDoorOpen)
-            {
-                _bigDoorBehaviour._isDoorOpen = !_bigDoorBehaviour._isDoorOpen;
-                openDoorSoundEffect.Play();
-
-            }
-            else if (_isDoorCloseSwitch && _bigDoorBehaviour != null && _bigDoorBehaviour._isDoorOpen)
-            {
-                _bigDoorBehaviour._isDoorOpen = !_bigDoorBehaviour._isDoorOpen;
+                if (_isDoorOpenSwitch && _doorBehaviour != null && !_doorBehaviour._isDoorOpen)
+                {
+                    _doorBehaviour._isDoorOpen = !_doorBehaviour._isDoorOpen;
+                    openDoorSoundEffect.Play();
+                }
+                else if (_isDoorCloseSwitch && _doorBehaviour != null && _doorBehaviour._isDoorOpen)
+                {
+                    _doorBehaviour._isDoorOpen = !_doorBehaviour._isDoorOpen;
+                }
+                else if (_isDoorOpenSwitch && _bigDoorBehaviour != null && !_bigDoorBehaviour._isDoorOpen)
+                {
+                    _bigDoorBehaviour._isDoorOpen = !_bigDoorBehaviour._isDoorOpen;
+                    openDoorSoundEffect.Play();
+                }
+                else if (_isDoorCloseSwitch && _bigDoorBehaviour != null && _bigDoorBehaviour._isDoorOpen)
+                {
+                    _bigDoorBehaviour._isDoorOpen = !_bigDoorBehaviour._isDoorOpen;
+                }
             }
         }
     }
@@ -96,5 +100,12 @@ public class SwitchBehaviour : MonoBehaviour
         _isPressingSwitch = false;
     }
 
-
+    public bool HasRequiredItem(InventoryManager.AllItems itemRequired)
+    {
+        if (InventoryManager.Instance._inventoryItems.Contains(itemRequired))
+        {
+            return true;
+        }
+        else return false;
+    }
 }

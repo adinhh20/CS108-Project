@@ -7,8 +7,9 @@ public class DoorBehaviour : MonoBehaviour
     public bool _isDoorOpen = false;
     Vector3 _doorClosedPos;
     Vector3 _doorOpenPos;
-    float _doorSpeed = 2f;
+    float _doorSpeed = 1.5f;
     // Start is called before the first frame update
+
     void Awake()
     {
         _doorClosedPos = transform.position;
